@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Member, type: :model do
   it "can be created successfully with valid data" do
-    member = Member.create(name: "Karen", email: "test@email.com", about: "I love making homemade gifts!", links: "instagram/karen.com")
+    member = Member.create(name: "Karen", email: "test@email.com", password: "karen", about: "I love making homemade gifts!", links: "instagram/karen.com")
     expect(member).to be_valid
   end
 
@@ -19,7 +19,7 @@ RSpec.describe Member, type: :model do
     it { is_expected.to validate_uniqueness_of(:links) }
 
 
-    # it { is_expected.to validate_presence_of(:password) }
+    it { is_expected.to validate_presence_of(:password) }
 
 
   end
