@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Members", type: :request do
   describe "GET /api/members" do
-    let!(:karen){Member.create!(name: 'Karen Smith', email: 'karen@email.com', about: 'Hi my name is Karen. I love making gifts for my friends and family.', links: 'instagram/karensmith.com')}
-    let!(:bob){Member.create!(name: 'Bob Bobson', email: 'bob@email.com', about: 'I am a maker of things!')}
+    let!(:karen){Member.create!(name: 'Karen Smith', email: 'karen@email.com', password:"karen", about: 'Hi my name is Karen. I love making gifts for my friends and family.', links: 'instagram/karensmith.com')}
+    let!(:bob){Member.create!(name: 'Bob Bobson', email: 'bob@email.com', password: "bob", about: 'I am a maker of things!')}
 
     it "returns an array of users" do
       get '/api/members'
@@ -26,10 +26,10 @@ RSpec.describe "Members", type: :request do
   end
 
   describe "GET /api/members/:id" do
-    let!(:member_params){Member.create!(name: 'Sam Smith', email: 'smith@email.com')}
+    let!(:member_params){Member.create!(name: 'Sam Smith', email: 'smith@email.com', password: "sam")}
 
     it "returns a member by id" do
-      # post '/api/login', params: user_params
+      # post '/api/login', params: member_params
       get "/api/members/#{member_params.id}"
       expect(response.body).to include_json({
                                               id: member_params.id,

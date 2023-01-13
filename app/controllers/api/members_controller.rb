@@ -1,5 +1,6 @@
 class Api::MembersController < ApplicationController
 
+  skip_before_action :authenticate_member, only: [:create, :show, :index]
   def create
     member = Member.create!(member_params)
     session[:user_id] = member.id
@@ -11,12 +12,8 @@ class Api::MembersController < ApplicationController
   end
 
   def show
-    if current_member
-      member = current_member
-      render json: member, status: :ok
-    else
-      # authenticate_user
-    end
+    member = Member.find(params[:id])
+    render json: member, status: :ok
   end
 
   private
