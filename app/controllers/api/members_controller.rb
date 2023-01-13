@@ -11,8 +11,12 @@ class Api::MembersController < ApplicationController
   end
 
   def show
-    member = Member.find(params[:id])
-    render json: member
+    if current_member
+      member = current_member
+      render json: member, status: :ok
+    else
+      # authenticate_user
+    end
   end
 
   private

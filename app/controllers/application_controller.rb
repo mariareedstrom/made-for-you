@@ -17,4 +17,8 @@ class ApplicationController < ActionController::API
   def current_member
     @current_member ||= Member.find_by_id(session[:user_id])
   end
+
+  def authenticate_member
+    render json: { error: "Not authorized" }, status: :unauthorized unless current_member
+  end
 end
