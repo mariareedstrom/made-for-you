@@ -1,10 +1,9 @@
 require 'rails_helper'
-
 RSpec.describe "Api::Gifts", type: :request do
-  describe "GET /api/gifts" do
+  let!(:jane) { Member.create!(name: 'Jane Doe', email: 'jane@email.com', password: "jane", links: "instagram/janed.com") }
+  let!(:john) { Member.create!(name: 'John Doe', email: 'john@email.com', password: "john", links: "faceboo/john.com") }
 
-    let!(:jane) { Member.create!(name: 'Jane Doe', email: 'jane@email.com', password: "jane", links: "instagram/janed.com") }
-    let!(:john) { Member.create!(name: 'John Doe', email: 'john@email.com', password: "john", links: "faceboo/john.com") }
+  describe "GET /api/gifts" do
 
     let!(:gift1) { Gift.create!(member: jane, name: "Coconut Candle", description: "This is a lovely scented candle that will remind you of the beach. Make it in a half coconut shell or your favorite mason jar.", difficulty: 4, picture_url: "https://cdn.shopify.com/s/files/1/1485/1040/products/MichaelEditedCoconutCandlewhitebackground_1000x1000.jpg?v=1605400119")}
     let!(:gift2) { Gift.create!(member: john, name: "Beer Bread", description: "An easy and delicious bread for all your beer loving friends. Bake it and gift as ready made loaf, of give the mixed dry ingredients along with their favorite beer", difficulty: 3, picture_url: "https://static01.nyt.com/images/2020/04/24/dining/30RECIPES/30RECIPES-articleLarge.jpg")}
@@ -30,10 +29,9 @@ RSpec.describe "Api::Gifts", type: :request do
     end
   end
 
+
   describe "POST /api/gifts" do
     context "with valid input" do
-      let!(:jane){Member.create!(name: 'Jane Doe', email: 'jane@email.com', password: "jane", links: "instagram/janed.com")}
-
       let!(:gift_params){
         {
           name: "Coconut Candle",
@@ -41,6 +39,10 @@ RSpec.describe "Api::Gifts", type: :request do
           difficulty: 4,
           picture_url: "https://cdn.shopify.com/s/files/1/1485/1040/products/MichaelEditedCoconutCandlewhitebackground_1000x1000.jpg?v=1605400119"
         }
+      }
+
+      let!(:current_user) {
+        post '/api/login', params: {email: jane.email, password: 'jane'}
       }
 
       it 'creates a new gift' do
@@ -52,7 +54,7 @@ RSpec.describe "Api::Gifts", type: :request do
 
         expect(response.body).to include_json({
                                                 id: a_kind_of(Integer),
-                                                user_id: jane.id,
+                                                member: { id: jane.id},
                                                 name: "Coconut Candle",
                                                 description: "This is a lovely scented candle that will remind you of the beach. Make it in a half coconut shell or your favorite mason jar.",
                                                 difficulty: 4,
