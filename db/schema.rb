@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_12_160021) do
+ActiveRecord::Schema.define(version: 2023_01_13_201623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "gifts", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "difficulty"
+    t.string "picture_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_gifts_on_member_id"
+  end
 
   create_table "members", force: :cascade do |t|
     t.string "name"
@@ -25,4 +36,5 @@ ActiveRecord::Schema.define(version: 2023_01_12_160021) do
     t.string "password_digest"
   end
 
+  add_foreign_key "gifts", "members"
 end

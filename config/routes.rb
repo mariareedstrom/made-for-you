@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
 
-
   namespace :api do
 
-  resources :members
-  resources :sessions, only: [:create, :destroy]
+    resources :gifts
+    resources :members
+    resources :sessions, only: [:create, :destroy]
 
-  post '/signup', to: 'members#create'
+    post '/signup', to: 'members#create'
 
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
-  get '/me', to: 'sessions#show'
+    post '/login', to: 'sessions#create'
+    delete '/logout', to: 'sessions#destroy'
+    get '/me', to: 'sessions#show'
   end
 
   # Routing logic: fallback requests for React Router.
