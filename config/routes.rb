@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
+
   namespace :api do
 
+    resources :recipients
     resources :gifts
     resources :members
     resources :sessions, only: [:create, :destroy]
