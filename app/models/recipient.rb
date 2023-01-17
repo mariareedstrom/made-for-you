@@ -1,6 +1,6 @@
 class Recipient < ApplicationRecord
   belongs_to :member
-  has_many :gift_recipients
+  has_many :gift_recipients, dependent: :destroy
   has_many :gifts, through: :gift_recipients
 
   validates :name, presence: true

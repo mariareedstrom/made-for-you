@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Recipient, type: :model do
+
   it "can be created successfully with valid data" do
     member = Member.create!(name: "Jane Doe", email: "jane@email.com", password: "jane", links: "/instagram/janded.com")
     recipient = Recipient.create!(member_id: member.id, name: "Karen", notes: "My favorite Aunt. She loves flowers and scents.")

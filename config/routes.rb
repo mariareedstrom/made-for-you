@@ -2,8 +2,10 @@ Rails.application.routes.draw do
 
 
 
+
   namespace :api do
 
+    resources :items
     resources :gift_recipients, only: :index
     resources :recipients
     resources :gifts

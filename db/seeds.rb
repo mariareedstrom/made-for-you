@@ -41,9 +41,14 @@ nick = Recipient.create(member_id: martha.id, name: "Nick N", notes: "allergic t
 
 
 #creating gift_recipients
-gr1 = GiftRecipient.create(gift: g1, recipient: jane)
-gr1 = GiftRecipient.create(gift: g2, recipient: bob)
-gr3 = GiftRecipient.create(gift: g3, recipient: cindy)
+gr1 = GiftRecipient.create(gift_id: g1.id, recipient_id: jane.id)
+gr2 = GiftRecipient.create(gift_id: g2.id, recipient_id: bob.id)
+gr3 = GiftRecipient.create(gift_id: g3.id, recipient_id: cindy.id)
+
+#creating items
+i1 = Item.create(gift_id: g1.id, name: "peanutbutter", quantity: 2, unit: "tablespoons")
+i2 = Item.create(gift_id: g1.id, name: "popcorn", quantity: 1, unit: "bag")
+i3 = Item.create(gift_id: g1.id, name: "caramel syrup", quantity: 3, unit: "teaspoons")
 
 
 puts "🌱Done Seeding 🌱"
