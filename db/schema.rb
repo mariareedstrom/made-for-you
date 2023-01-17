@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_16_190028) do
+ActiveRecord::Schema.define(version: 2023_01_17_153546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "gift_recipients", force: :cascade do |t|
+    t.bigint "recipient_id", null: false
+    t.bigint "gift_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gift_id"], name: "index_gift_recipients_on_gift_id"
+    t.index ["recipient_id"], name: "index_gift_recipients_on_recipient_id"
+  end
 
   create_table "gifts", force: :cascade do |t|
     t.bigint "member_id", null: false
@@ -45,6 +54,8 @@ ActiveRecord::Schema.define(version: 2023_01_16_190028) do
     t.index ["member_id"], name: "index_recipients_on_member_id"
   end
 
+  add_foreign_key "gift_recipients", "gifts"
+  add_foreign_key "gift_recipients", "recipients"
   add_foreign_key "gifts", "members"
   add_foreign_key "recipients", "members"
 end

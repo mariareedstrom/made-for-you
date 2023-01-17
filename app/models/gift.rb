@@ -1,5 +1,7 @@
 class Gift < ApplicationRecord
   belongs_to :member
+  has_many :gift_recipients
+  has_many :recipients, through: :gift_recipients
 
   validates :name, presence: true
   validates :description, presence: true, length: { in: 50..250  }

@@ -17,6 +17,7 @@ RSpec.describe Gift, type: :model do
 
   describe "Associations" do
     it { should belong_to(:member) }
+    it {should have_many(:recipients).through(:gift_recipients)}
   end
 
   describe "Validations" do

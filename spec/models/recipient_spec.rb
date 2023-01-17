@@ -7,6 +7,11 @@ RSpec.describe Recipient, type: :model do
     expect(recipient).to be_valid
   end
 
+  describe "Associations" do
+    it { should belong_to(:member) }
+    it {should have_many(:gifts).through(:gift_recipients)}
+  end
+
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to allow_value("John").for(:name) }

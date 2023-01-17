@@ -27,7 +27,7 @@ class Api::RecipientsController < ApplicationController
   private
 
   def recipient_parms
-    params.permit(:name, :notes)
+    params.permit(:name, :notes, :gift_id)
   end
 
   def set_recipient
