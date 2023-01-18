@@ -17,11 +17,11 @@ joe = Member.create(name: "Joe Schmo", email: "joe@email.com", password: "joe", 
 alice = Member.create(name: "Alice", email: "alice@email.com", password: "alice", about: "Novice gift maker, longtime giver.", links: "instagram/alice.com")
 
 #creaing gifts
-g1 = Gift.create(member_id: martha.id, name: "Peanut Popcorn Balls", description: "Caramel-coated peanut-popcorn balls. Wrap them in plain parchment and striped waxed paper for the full bon-bon effect.", difficulty: 4, picture_url:"http://bit.ly/3kcNGiE")
-g2 = Gift.create(member_id: bertha.id, name: "Sriracha Honey", description: "Sweet honey with a sting.", difficulty: 3, picture_url: "http://bit.ly/3krgl3S")
-g3 = Gift.create(member_id: joe.id, name: "Limonchello", description: "Sweet, lemon flavored liquor. Takes about 3 months to complete, but worth the wait.", difficulty: 4, picture_url:"http://bit.ly/3QN9ca2")
-g4 = Gift.create(member_id: alice.id, name: "Beer Bread", description: "An easy and delicious loaf of bread.Make with your favorite brew. Bake and gift ready made, og mix dry ingredients in a mason jar and gift alongside their favorite beer.", difficulty: 3, picture_url:"http://bit.ly/3kqpedF")
-g5 = Gift.create(member_id: alice.id, name: "Handmade Headbands", description: "Great gift for your fashion savvy ladies. Easy to make and cute to wear.", difficulty: 2, picture_url:"http://bit.ly/3XwNCbO")
+g1 = Gift.create(member_id: martha.id, name: "Peanut Popcorn Balls", description: "Caramel-coated peanut-popcorn balls. Wrap them in plain parchment and striped waxed paper for the full bon-bon effect.", difficulty: 4, picture_url:"http://bit.ly/3kcNGiE", type_of_gift:1)
+g2 = Gift.create(member_id: bertha.id, name: "Sriracha Honey", description: "Sweet honey with a sting.", difficulty: 3, picture_url: "http://bit.ly/3krgl3S", type_of_gift:1)
+g3 = Gift.create(member_id: joe.id, name: "Limonchello", description: "Sweet, lemon flavored liquor. Takes about 3 months to complete, but worth the wait.", difficulty: 4, picture_url:"http://bit.ly/3QN9ca2", type_of_gift:2)
+g4 = Gift.create(member_id: alice.id, name: "Beer Bread", description: "An easy and delicious loaf of bread.Make with your favorite brew. Bake and gift ready made, og mix dry ingredients in a mason jar and gift alongside their favorite beer.", difficulty: 3, picture_url:"http://bit.ly/3kqpedF", type_of_gift:1)
+g5 = Gift.create(member_id: alice.id, name: "Handmade Headbands", description: "Great gift for your fashion savvy ladies. Easy to make and cute to wear.", difficulty: 2, picture_url:"http://bit.ly/3XwNCbO", type_of_gift:0)
 
 
 #creating recipients

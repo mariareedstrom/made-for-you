@@ -8,4 +8,7 @@ class Gift < ApplicationRecord
   validates :description, presence: true, length: { in: 50..250  }
   validates :difficulty, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 5}
   validates :picture_url, presence: true
+
+  enum type_of_gift: [:craft, :food, :beverage]
+
 end
