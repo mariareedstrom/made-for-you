@@ -1,5 +1,5 @@
 class Api::GiftsController < ApplicationController
-  before_action :set_gift, only: [:show, :update, :destroy]
+  before_action :set_gift, only: [:update, :destroy]
   skip_before_action :authenticate_member, only: [:show, :index]
 
   def create
@@ -12,7 +12,8 @@ class Api::GiftsController < ApplicationController
   end
 
   def show
-    render json: @gift, status: :ok
+    gift = Gift.find_by(id: params[:id])
+    render json: gift, status: :ok
   end
 
   def update

@@ -7,6 +7,7 @@ import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 import Header from "./components/Header";
 import GiftIndex from "./pages/GiftIndex";
+import GiftShow from "./pages/GiftShow";
 
 
 
@@ -16,8 +17,16 @@ function App() {
     const value = useMemo(() => ({currentMember, setCurrentMember}), [currentMember, setCurrentMember]);
 
     const [authenticated, setAuthenticated] = useState(false)
+    const [gifts, setGifts] = useState([])
 
     const navigate = useNavigate()
+
+    useEffect(()=> {
+        fetch('/api/gifts')
+            .then((res) => res.json())
+            .then((gifts) => setGifts(gifts))
+    }, [])
+
 
     useEffect(() => {
         fetch('/api/me')
@@ -51,12 +60,13 @@ function App() {
                     <Routes>
                         <Route path="/" element=
                             {currentMember ? (
-                                <GiftIndex/>
+                                <GiftIndex gifts={gifts}/>
                             ) : (
                                 <LoginForm/>
                             )}
                         />
                         <Route path="/signup" element={<SignupForm/>}/>
+                        <Route path="/gifts/:id" element={<GiftShow gifts={gifts}/>}/>
                     </Routes>
                 </CurrentMemberContext.Provider>
 

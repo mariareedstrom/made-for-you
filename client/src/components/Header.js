@@ -1,22 +1,14 @@
 import React, {useContext} from "react";
+import {Link}from 'react-router-dom'
 import {CurrentMemberContext} from "../context/currentMember";
 import {logo} from "./Header.module.css";
-import {AppBar, Avatar, Box, Button, Container, Link, Toolbar} from "@mui/material";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import {AppBar, Avatar, Button, Container, Toolbar} from "@mui/material";
 
 
 
 
 function Header({handleLogout}) {
     const {currentMember} = useContext(CurrentMemberContext)
-    // const [category, setCategory] = React.useState('');
-
-    // const handleChange = (event: SelectChangeEvent) => {
-    //     setCategory(event.target.value);
-    // };
 
     return (
         <AppBar position="static" sx={{marginBottom: "36px", bgcolor: "#fff"}}>
@@ -32,22 +24,6 @@ function Header({handleLogout}) {
                     <Button size="small">Food</Button>
                     <Button size="small">Beverage</Button>
 
-                    {/*<Box sx={{ minWidth: 120 }}>*/}
-                    {/*    <FormControl fullWidth>*/}
-                    {/*        <InputLabel id="demo-simple-select-label">Category</InputLabel>*/}
-                    {/*        <Select*/}
-                    {/*            labelId="category-select-label"*/}
-                    {/*            id="category-select"*/}
-                    {/*            value={category}*/}
-                    {/*            label="Category"*/}
-                    {/*            onChange={handleChange}*/}
-                    {/*        >*/}
-                    {/*            <MenuItem value={"christmas"}>Christmas</MenuItem>*/}
-                    {/*            <MenuItem value={"Valentines"}>Valentines</MenuItem>*/}
-                    {/*            <MenuItem value={"Birthday"}>Birthday</MenuItem>*/}
-                    {/*        </Select>*/}
-                    {/*    </FormControl>*/}
-                    {/*</Box>*/}
                     <Button variant="outlined" color="primary" sx={{margin: "12px"}}
                             onClick={handleLogout}>Logout</Button>
 
