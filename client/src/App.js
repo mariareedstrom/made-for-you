@@ -8,6 +8,9 @@ import SignupForm from "./components/SignupForm";
 import Header from "./components/Header";
 import GiftIndex from "./pages/GiftIndex";
 import GiftShow from "./pages/GiftShow";
+import NewGiftForm from "./components/NewGiftForm";
+import MemberShow from "./pages/MemberShow";
+import MemberEdit from "./pages/MemberEdit";
 
 
 
@@ -54,7 +57,7 @@ function App() {
 
     return (
                 <CurrentMemberContext.Provider value={value}>
-                    {currentMember ? <Header handleLogout={handleLogout} /> : null}
+                    {currentMember ? <Header /> : null}
                     <Container>
                         <Routes>
                             <Route path="/" element=
@@ -65,7 +68,10 @@ function App() {
                                 )}
                             />
                             <Route path="/signup" element={<SignupForm/>}/>
+                            <Route path="/members/:id" element={<MemberShow handleLogout={handleLogout}/>}/>
+                            <Route path="/members/:id/edit" element={<MemberEdit />}/>
                             <Route path="/gifts/:id" element={<GiftShow gifts={gifts}/>}/>
+                            <Route path="/gifts/new" element={<NewGiftForm />}/>
                         </Routes>
                     </Container>
 

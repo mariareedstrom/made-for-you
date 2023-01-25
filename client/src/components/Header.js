@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Link}from 'react-router-dom'
+import {Link, useNavigate}from 'react-router-dom'
 import {CurrentMemberContext} from "../context/currentMember";
 import {logo} from "./Header.module.css";
 import {AppBar, Avatar, Button, Container, Toolbar} from "@mui/material";
@@ -9,6 +9,15 @@ import {AppBar, Avatar, Button, Container, Toolbar} from "@mui/material";
 
 function Header({handleLogout}) {
     const {currentMember} = useContext(CurrentMemberContext)
+const navigate = useNavigate()
+
+    function handleNewGift() {
+        navigate(`/gifts/new`)
+    }
+
+    function handleViewMember() {
+        navigate(`/members/${currentMember.id}`)
+    }
 
     return (
         <AppBar position="static" sx={{marginBottom: "36px", bgcolor: "#fff"}}>
@@ -24,10 +33,11 @@ function Header({handleLogout}) {
                     <Button size="small">Food</Button>
                     <Button size="small">Beverage</Button>
 
-                    <Button variant="outlined" color="primary" sx={{margin: "12px"}}
-                            onClick={handleLogout}>Logout</Button>
+                    <Button variant="outlined" color="secondary" sx={{margin: "12px"}}
+                            onClick={handleNewGift}>New Gift</Button>
 
-                    <Avatar variant="square" alt={`${currentMember.name}`} src="/gift.png" sx={{margin: "12px"}}></Avatar>
+
+                    <Avatar variant="square" alt={`${currentMember.name}`} src="/gift.png" sx={{margin: "12px"}} onClick={handleViewMember}></Avatar>
                 </Toolbar>
             </Container>
         </AppBar>

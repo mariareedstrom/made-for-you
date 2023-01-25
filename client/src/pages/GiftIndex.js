@@ -6,10 +6,9 @@ import {Box, Grid} from "@mui/material";
 function GiftIndex({gifts}){
     const currentMember = useContext(CurrentMemberContext)
 
-
     return(
         <Box display="flex">
-            <Grid>
+            <Grid container spacing={4}>
                 {gifts.map((gift) => (
                     <Grid item display="flex" key={gift.id}>
                         <GiftCard gift={gift}/>

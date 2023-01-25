@@ -23,29 +23,36 @@ function GiftShow({gifts}) {
         return <></>
     }
 
-    const {type_of_gift, name, description, picture_url, difficulty, member, items} = gift
+    const {type_of_gift, name, description, picture_url, difficulty, member, items, recipients} = gift
 
     return (
         <Box>
-            <Box sx={{width: "768px", height: "460px"}}>
+            <Box sx={{height: "460px"}}>
                 <img alt={name} src={picture_url} width="100%" height="100%"/>
             </Box>
+
             <Box>
-                <Typography variant="h2">
-                    {name}
-                </Typography>
+                <Typography variant="h2">{name}</Typography>
+               <Typography> Difficulty: {difficulty} Type: {type_of_gift}</Typography>
             </Box>
-            <Box>
-                Difficulty: {difficulty} Type: {type_of_gift}
-            </Box>
+
             <Box sx={{width: "786px"}}>
                 {description}
             </Box>
+
             <Box>
-                Made by {member.name}
+                <Typography component="span">
+                     Made by {member.name}
+                </Typography>
+
+                <Typography component="span" >
+                 {recipients.map((recipient) => (
+                <Typography>Made for {recipient.name}</Typography>
+            ))}
+                </Typography>
             </Box>
 
-            <Box sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+            <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
                 <Typography color="text.secondary">Items Needed:</Typography>
                 <List>
                     {items.map((item) =>
@@ -56,6 +63,10 @@ function GiftShow({gifts}) {
                         />
                         ))}
                 </List>
+            </Box>
+            <Box>
+                <Typography>Directions</Typography>
+                <Typography>this is how we do it.. </Typography>
             </Box>
         </Box>
     )}

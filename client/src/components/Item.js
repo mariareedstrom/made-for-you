@@ -3,6 +3,7 @@ import ListItem from "@mui/material/ListItem";
 import {Box, ListItemText, Typography} from "@mui/material";
 
 function Item({item}){
+
 const {name, quantity, unit} = item
     return(
         <ListItem alignItems="flex-start">
