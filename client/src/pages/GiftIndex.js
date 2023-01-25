@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext} from "react";
 import GiftCard from "../components/GiftCard";
 import {CurrentMemberContext} from "../context/currentMember";
-import {Box, Grid, Typography} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 
 function GiftIndex({gifts}){
     const currentMember = useContext(CurrentMemberContext)

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function GiftCard({gift}) {
     const {type_of_gift, name, description,  picture_url, difficulty, id} = gift
 
-    console.log(gift)
+
 
     return (
         <Card sx={{ display: 'flex' }}>

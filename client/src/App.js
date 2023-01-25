@@ -53,26 +53,23 @@ function App() {
     }
 
     return (
-        <>
-            <Container>
                 <CurrentMemberContext.Provider value={value}>
                     {currentMember ? <Header handleLogout={handleLogout} /> : null}
-                    <Routes>
-                        <Route path="/" element=
-                            {currentMember ? (
-                                <GiftIndex gifts={gifts}/>
-                            ) : (
-                                <LoginForm/>
-                            )}
-                        />
-                        <Route path="/signup" element={<SignupForm/>}/>
-                        <Route path="/gifts/:id" element={<GiftShow gifts={gifts}/>}/>
-                    </Routes>
+                    <Container>
+                        <Routes>
+                            <Route path="/" element=
+                                {currentMember ? (
+                                    <GiftIndex gifts={gifts}/>
+                                ) : (
+                                    <LoginForm/>
+                                )}
+                            />
+                            <Route path="/signup" element={<SignupForm/>}/>
+                            <Route path="/gifts/:id" element={<GiftShow gifts={gifts}/>}/>
+                        </Routes>
+                    </Container>
+
                 </CurrentMemberContext.Provider>
-
-
-            </Container>
-        </>
     );
 }
 
