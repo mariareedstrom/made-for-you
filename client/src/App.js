@@ -11,6 +11,7 @@ import GiftShow from "./pages/GiftShow";
 import NewGiftForm from "./components/NewGiftForm";
 import MemberShow from "./pages/MemberShow";
 import MemberEdit from "./pages/MemberEdit";
+import GiftEdit from "./pages/GiftEdit";
 
 
 
@@ -55,6 +56,10 @@ function App() {
         navigate(`/`)
     }
 
+    function handleDeleteGift(giftId){
+            setGifts(gifts.filter(({id}) => `${id}` !== giftId))
+    }
+
     return (
                 <CurrentMemberContext.Provider value={value}>
                     {currentMember ? <Header /> : null}
@@ -71,6 +76,7 @@ function App() {
                             <Route path="/members/:id" element={<MemberShow handleLogout={handleLogout}/>}/>
                             <Route path="/members/:id/edit" element={<MemberEdit />}/>
                             <Route path="/gifts/:id" element={<GiftShow gifts={gifts}/>}/>
+                            <Route path="/gifts/:id/edit" element={<GiftEdit gifts={gifts} onDeleteGift={handleDeleteGift}/>}/>
                             <Route path="/gifts/new" element={<NewGiftForm />}/>
                         </Routes>
                     </Container>

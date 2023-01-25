@@ -1,14 +1,20 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {Box, Typography} from "@mui/material";
+import React, {useContext, useEffect, useState} from "react";
+import {useParams, Link, useNavigate} from "react-router-dom";
+import {Box, IconButton, Typography} from "@mui/material";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import List from '@mui/material/List';
 import Item from "../components/Item";
+import {CurrentMemberContext} from "../context/currentMember";
 
 
-function GiftShow({gifts}) {
+
+function GiftShow({gifts, onDeleteGift}) {
+    const currentMember = useContext(CurrentMemberContext)
     const [gift, setGift] = useState(null)
-
     const giftId = useParams().id
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         if (gifts.length > 0) {
@@ -23,7 +29,17 @@ function GiftShow({gifts}) {
         return <></>
     }
 
-    const {type_of_gift, name, description, picture_url, difficulty, member, items, recipients} = gift
+    const {type_of_gift, name, description, picture_url, difficulty, member, items, recipients, id} = gift
+
+    function handleDeleteGift(){
+        fetch(`/api/gifts/${giftId}`, {
+            method: "DELETE",
+        })
+            .then(() => {
+                onDeleteGift(giftId)
+                navigate("/")
+            })
+    }
 
     return (
         <Box>
@@ -44,10 +60,10 @@ function GiftShow({gifts}) {
                 <Typography component="span">
                      Made by {member.name}
                 </Typography>
-
+                <Typography>Made for:</Typography>
                 <Typography component="span" >
                  {recipients.map((recipient) => (
-                <Typography>Made for {recipient.name}</Typography>
+                <Typography key={recipient.name}>{recipient.name}</Typography>
             ))}
                 </Typography>
             </Box>
@@ -68,6 +84,24 @@ function GiftShow({gifts}) {
                 <Typography>Directions</Typography>
                 <Typography>this is how we do it.. </Typography>
             </Box>
+            {
+                currentMember.currentMember.id === member.id ?
+                    <IconButton color="error"
+                                component={Link}
+                                to={{pathname: `/gifts/${id}/edit`}}
+                    >
+                        <EditOutlinedIcon/>
+                    </IconButton> : null
+            }
+            {
+                currentMember.currentMember.id === member.id ?
+                    <IconButton color="error"
+                                onClick={handleDeleteGift}
+                    >
+                        <DeleteOutlineIcon/>
+                    </IconButton> : null
+            }
+
         </Box>
     )}
 
