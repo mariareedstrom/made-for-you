@@ -1,6 +1,6 @@
 class Api::GiftsController < ApplicationController
   before_action :set_gift, only: [:update, :destroy]
-  skip_before_action :authenticate_member, only: [:show, :index]
+  skip_before_action :authenticate_member, only: [:show, :index, :destroy]
 
   def create
     gift = current_member.gifts.create!(gift_params)

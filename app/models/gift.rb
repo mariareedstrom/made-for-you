@@ -2,7 +2,7 @@ class Gift < ApplicationRecord
   belongs_to :member
   has_many :gift_recipients, dependent: :destroy
   has_many :recipients, through: :gift_recipients
-  has_many :items
+  has_many :items, dependent: :destroy
 
   accepts_nested_attributes_for :items
 

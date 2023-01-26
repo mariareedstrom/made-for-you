@@ -16,7 +16,7 @@ function MemberEdit() {
     function handleSubmit(e) {
         e.preventDefault()
 
-        return fetch(`/api/users/${currentMember.id}`, {
+        return fetch(`/api/members/${currentMember.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +26,7 @@ function MemberEdit() {
             .then(res => res.json())
             .then(data => {
                 setCurrentMember(data)
-                navigate(`/users/${currentMember.id}`)
+                navigate(`/members/${currentMember.id}`)
             })
     }
 

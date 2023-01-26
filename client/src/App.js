@@ -88,10 +88,15 @@ function App() {
                                 )}
                             />
                             <Route path="/signup" element={<SignupForm/>}/>
-                            <Route path="/members/:id" element={<MemberShow handleLogout={handleLogout}/>}/>
+                            <Route path="/members/:id" element={<MemberShow handleLogout={handleLogout}
+                                                                            onGiftUpdate={handleGiftUpdate}
+                                                                            gifts={gifts}/>}/>
                             <Route path="/members/:id/edit" element={<MemberEdit />}/>
-                            <Route path="/gifts/:id" element={<GiftShow gifts={gifts} onDeleteGift={handleDeleteGift}/>}/>
-                            <Route path="/gifts/:id/edit" element={<GiftEdit gifts={gifts} onGiftUpdate={handleGiftUpdate} onDeleteGift={handleDeleteGift}/>}/>
+                            <Route path="/gifts/:id" element={<GiftShow gifts={gifts}
+                                                                        onDeleteGift={handleDeleteGift}/>}/>
+                            <Route path="/gifts/:id/edit" element={<GiftEdit gifts={gifts}
+                                                                             onGiftUpdate={handleGiftUpdate}
+                                                                             onDeleteGift={handleDeleteGift}/>}/>
                             <Route path="/gifts/new" element={<NewGiftForm onAddGift={handleAddGift}/>}/>
                         </Routes>
                     </Container>

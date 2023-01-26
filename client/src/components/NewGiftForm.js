@@ -49,7 +49,6 @@ function NewGiftForm({onAddGift}){
                 if (res.ok) {
                     res.json()
                         .then((data) => {
-                            console.log(data)
                             onAddGift(data)
                             navigate("/")
                         })

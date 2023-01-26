@@ -16,6 +16,12 @@ class Api::MembersController < ApplicationController
     render json: member, status: :ok
   end
 
+  def update
+    member = Member.find(params[:id])
+    member.update(member_params)
+    render json: user, status: :ok
+  end
+
   private
 
   def member_params
