@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useParams, Link, useNavigate} from "react-router-dom";
-import {Box, IconButton, Typography} from "@mui/material";
+import { Box, Chip, IconButton, Paper, Typography} from "@mui/material";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import List from '@mui/material/List';
@@ -29,7 +29,7 @@ function GiftShow({gifts, onDeleteGift}) {
         return <></>
     }
 
-    const {type_of_gift, name, description, picture_url, difficulty, member, items, recipients, id} = gift
+    const {type_of_gift, name, description, picture_url, difficulty, member, items, recipients, id, instructions} = gift
 
     function handleDeleteGift(){
         fetch(`/api/gifts/${giftId}`, {
@@ -42,34 +42,47 @@ function GiftShow({gifts, onDeleteGift}) {
     }
 
     return (
-        <Box>
-            <Box sx={{height: "460px"}}>
-                <img alt={name} src={picture_url} width="100%" height="100%"/>
+        <Paper>
+            <Box sx={{height: "460px", objectFit:"cover"}} >
+                <img alt={name} src={picture_url} width="100%" height="100%" />
             </Box>
 
-            <Box>
-                <Typography variant="h2">{name}</Typography>
-               <Typography> Difficulty: {difficulty} Type: {type_of_gift}</Typography>
+
+            <Typography variant="h2">{name}</Typography>
+            <Typography component="span">Made by {member.name}</Typography>
+            <Box display={'flex'} gap={'12px'}>
+                <Chip label={difficulty}/>
+                <Chip label={type_of_gift} />
+                <Box display={'flex'} flex={'1 1 auto'} justifyContent={'flex-end'} gap={'12px'}>
+                    {
+                        currentMember.currentMember.id === member.id ?
+                            <IconButton color="error"
+                                        component={Link}
+                                        to={{pathname: `/gifts/${id}/edit`}}
+                                        alignself={'flex-end'}
+                            >
+                                <EditOutlinedIcon/>
+                            </IconButton> : null
+                    }
+                    {
+                        currentMember.currentMember.id === member.id ?
+                            <IconButton color="error"
+                                        onClick={handleDeleteGift}
+                            >
+                                <DeleteOutlineIcon/>
+                            </IconButton> : null
+                    }
+                </Box>
             </Box>
 
-            <Box sx={{width: "786px"}}>
+            <Typography >
                 {description}
-            </Box>
+            </Typography>
 
-            <Box>
-                <Typography component="span">
-                     Made by {member.name}
-                </Typography>
-                <Typography>Made for:</Typography>
-                <Typography component="span" >
-                 {recipients.map((recipient) => (
-                <Typography key={recipient.name}>{recipient.name}</Typography>
-            ))}
-                </Typography>
-            </Box>
+            <Box sx={{display:"flex", columnGap:"16px"}}>
 
-            <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
-                <Typography color="text.secondary">Items Needed:</Typography>
+            <Paper sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+                <Typography variant="subtitle1" color="text.secondary">Items required</Typography>
                 <List>
                     {items.map((item) =>
                         (<Item key={item.id}
@@ -79,30 +92,24 @@ function GiftShow({gifts, onDeleteGift}) {
                         />
                         ))}
                 </List>
+            </Paper>
+            <Paper sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+                <Typography variant="subtitle1" color="text.secondary">Instructions</Typography>
+                <Typography>{instructions}</Typography>
+            </Paper>
             </Box>
-            <Box>
-                <Typography>Directions</Typography>
-                <Typography>this is how we do it.. </Typography>
-            </Box>
-            {
-                currentMember.currentMember.id === member.id ?
-                    <IconButton color="error"
-                                component={Link}
-                                to={{pathname: `/gifts/${id}/edit`}}
-                    >
-                        <EditOutlinedIcon/>
-                    </IconButton> : null
-            }
-            {
-                currentMember.currentMember.id === member.id ?
-                    <IconButton color="error"
-                                onClick={handleDeleteGift}
-                    >
-                        <DeleteOutlineIcon/>
-                    </IconButton> : null
-            }
 
-        </Box>
+            <Box>
+                <Typography>This gift has been made with love for</Typography>
+                <Typography component="span" >
+                    {recipients.map((recipient) => (
+                        <Typography key={recipient.name}>{recipient.name}</Typography>
+                    ))}
+                </Typography>
+            </Box>
+
+
+        </Paper>
     )}
 
             export default GiftShow;

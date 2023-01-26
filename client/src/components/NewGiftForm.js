@@ -17,6 +17,7 @@ function NewGiftForm({onAddGift}){
         difficulty: 0,
         description: "",
         items: [{id: "", quantity: 0, unit: "", name: ""}],
+        instructions:""
     })
     const [errors, setErrors] = useState([])
 
@@ -132,6 +133,13 @@ function NewGiftForm({onAddGift}){
                     items={formData.items}
                     onItemsUpdated={onItemsUpdated}
                 />
+                <TextField onChange={(e) => handleChange(e)}
+                           label="instructions"
+                           name="instructions"
+                           value={formData.instructions}
+                           placeholder="enter brief instructions"
+                           type="text"
+                           fullWidth required/>
 
                 {errors.length > 0 && (
                     <ul style={{ color: "red" }}>

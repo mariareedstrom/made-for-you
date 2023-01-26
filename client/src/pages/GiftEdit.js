@@ -21,6 +21,7 @@ function GiftEdit({gifts, onGiftUpdate}) {
         difficulty: 0,
         description: "",
         items: [{id: "", quantity: 0, unit: "", name: ""}],
+        instructions:""
     })
 
     const giftId = useParams().id
@@ -43,7 +44,8 @@ function GiftEdit({gifts, onGiftUpdate}) {
                 type_of_gift: gift.type_of_gift,
                 difficulty: gift.difficulty,
                 description: gift.description,
-                items: gift.items
+                items: gift.items,
+                instructions: gift.instructions
             })
         }
     }, [gift]);
@@ -151,6 +153,13 @@ function GiftEdit({gifts, onGiftUpdate}) {
                     items={formData.items}
                     onItemsUpdated={onItemsUpdated}
                 />
+                <TextField onChange={(e) => handleChange(e)}
+                           label="instructions"
+                           name="instructions"
+                           value={formData.instructions}
+                           placeholder="enter brief instructions"
+                           type="text"
+                           fullWidth required/>
 
                 {!!errors && errors.length > 0 && (
                     <ul style={{ color: "red" }}>

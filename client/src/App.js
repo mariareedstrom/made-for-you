@@ -78,7 +78,7 @@ function App() {
 
                 <CurrentMemberContext.Provider value={value}>
                     {currentMember ? <Header /> : null}
-                    <Container maxWidth="xl">
+                    <Container maxWidth="md">
                         <Routes>
                             <Route path="/" element=
                                 {currentMember ? (
