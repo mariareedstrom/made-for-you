@@ -16,7 +16,7 @@ function NewGiftForm({onAddGift}){
         type_of_gift: GIFT_TYPE.FOOD,
         difficulty: 0,
         description: "",
-        items: [{id: 1, name: "", unit: "", quantity: 0}]
+        items: [{id: "", quantity: 0, unit: "", name: ""}],
     })
     const [errors, setErrors] = useState([])
 
@@ -26,11 +26,16 @@ function NewGiftForm({onAddGift}){
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
+    function onItemsUpdated(items) {
+        setFormData({...formData, items})
+    }
+
+
     function handleSubmit(e) {
         e.preventDefault()
 
-        const items = formData.items.filter(
-            (item) => item !== {}
+        const items_attributes = formData.items.filter(
+            (item) => item !== {id: "", quantity: "0", unit: "", name: ""}
         );
 
         fetch(`/api/gifts/`,{
@@ -38,7 +43,7 @@ function NewGiftForm({onAddGift}){
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({...formData, items_attributes})
         })
             .then(res => {
                 if (res.ok) {
@@ -55,9 +60,6 @@ function NewGiftForm({onAddGift}){
             })
     }
 
-    function onItemsUpdated(items) {
-        setFormData({ ...formData, items });
-    }
 
 
     return(

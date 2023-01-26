@@ -48,7 +48,7 @@ function GiftMaterials({items, onItemsUpdated}) {
 
     function handleAddItem() {
         const materialValues = serializeItems();
-        onItemsUpdated([...materialValues, {}]);
+        onItemsUpdated([...materialValues, {id: "", quantity: 0, unit: "", name: ""}]);
     }
 
     return (
@@ -60,7 +60,7 @@ function GiftMaterials({items, onItemsUpdated}) {
                 variant="outlined"
                 onClick={handleAddItem}
             >
-                + Add Ingredient
+                + Add Item
             </Button>
         </Box>
     )

@@ -29,7 +29,7 @@ class Api::GiftsController < ApplicationController
   private
 
   def gift_params
-    params.permit(:name, :description, :difficulty, :type_of_gift, :picture_url, :recipient_id)
+    params.permit(:name, :description, :difficulty, :type_of_gift, :picture_url, :recipient_id, items_attributes: [:id, :name, :quantity, :unit])
   end
 
   def set_gift

@@ -4,6 +4,8 @@ class Gift < ApplicationRecord
   has_many :recipients, through: :gift_recipients
   has_many :items
 
+  accepts_nested_attributes_for :items
+
   validates :name, presence: true
   validates :description, presence: true, length: { in: 50..250  }
   validates :difficulty, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 5}

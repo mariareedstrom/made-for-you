@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Typography from "@mui/material/Typography";
 import {Button, FormControl, InputLabel, MenuItem, Paper, Select, TextField} from "@mui/material";
+import GiftMaterials from "../components/GiftMaterials";
 
 const GIFT_TYPE = {
     CRAFT: 0,
@@ -19,6 +20,7 @@ function GiftEdit({gifts, onGiftUpdate}) {
         type_of_gift: GIFT_TYPE.FOOD,
         difficulty: 0,
         description: "",
+        items: [{id: "", quantity: 0, unit: "", name: ""}],
     })
 
     const giftId = useParams().id
@@ -41,12 +43,18 @@ function GiftEdit({gifts, onGiftUpdate}) {
                 type_of_gift: gift.type_of_gift,
                 difficulty: gift.difficulty,
                 description: gift.description,
+                items: gift.items
             })
         }
     }, [gift]);
 
+    console.log(gift)
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value})
+    }
+
+    function onItemsUpdated(items) {
+        setFormData({...formData, items})
     }
 
     function handleSubmit(e){
@@ -139,6 +147,10 @@ function GiftEdit({gifts, onGiftUpdate}) {
                            placeholder="enter gift description"
                            type="text"
                            fullWidth required/>
+                <GiftMaterials
+                    items={formData.items}
+                    onItemsUpdated={onItemsUpdated}
+                />
 
                 {!!errors && errors.length > 0 && (
                     <ul style={{ color: "red" }}>
