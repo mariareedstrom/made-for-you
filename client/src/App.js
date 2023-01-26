@@ -65,10 +65,20 @@ function App() {
             setGifts(gifts.filter(({id}) => `${id}` !== giftId))
     }
 
+    function handleGiftUpdate(gift, props) {
+        const index = gifts.indexOf(gift)
+        const updated = {...gift, ...props}
+        const copyArray = gifts.slice()
+
+        copyArray.splice(index, 1, updated)
+        setGifts(copyArray)
+    }
+
     return (
+
                 <CurrentMemberContext.Provider value={value}>
                     {currentMember ? <Header /> : null}
-                    <Container>
+                    <Container maxWidth="xl">
                         <Routes>
                             <Route path="/" element=
                                 {currentMember ? (
@@ -80,8 +90,8 @@ function App() {
                             <Route path="/signup" element={<SignupForm/>}/>
                             <Route path="/members/:id" element={<MemberShow handleLogout={handleLogout}/>}/>
                             <Route path="/members/:id/edit" element={<MemberEdit />}/>
-                            <Route path="/gifts/:id" element={<GiftShow gifts={gifts}/>}/>
-                            <Route path="/gifts/:id/edit" element={<GiftEdit gifts={gifts} onDeleteGift={handleDeleteGift}/>}/>
+                            <Route path="/gifts/:id" element={<GiftShow gifts={gifts} onDeleteGift={handleDeleteGift}/>}/>
+                            <Route path="/gifts/:id/edit" element={<GiftEdit gifts={gifts} onGiftUpdate={handleGiftUpdate} onDeleteGift={handleDeleteGift}/>}/>
                             <Route path="/gifts/new" element={<NewGiftForm onAddGift={handleAddGift}/>}/>
                         </Routes>
                     </Container>

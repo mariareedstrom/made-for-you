@@ -43,8 +43,9 @@ function NewGiftForm({onAddGift}){
             .then(res => {
                 if (res.ok) {
                     res.json()
-                        .then((cleaned) => {
-                            onAddGift(formData)
+                        .then((data) => {
+                            console.log(data)
+                            onAddGift(data)
                             navigate("/")
                         })
                 } else
@@ -130,6 +131,14 @@ function NewGiftForm({onAddGift}){
                     items={formData.items}
                     onItemsUpdated={onItemsUpdated}
                 />
+
+                {errors.length > 0 && (
+                    <ul style={{ color: "red" }}>
+                        {errors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
 
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <Button variant="contained" size="medium" color="primary" aria-label="submit" type="submit">

@@ -10,7 +10,7 @@ const GIFT_TYPE = {
     FOOD: 1,
     BEVERAGE: 2
 };
-function GiftEdit({gifts}) {
+function GiftEdit({gifts, onGiftUpdate}) {
     const [gift, setGift] =  useState(null)
     const [errors, setErrors] = useState(null)
     const [formData, setFormData] = useState({
@@ -64,6 +64,7 @@ function GiftEdit({gifts}) {
                     res.json()
                         .then((data) => {
                             setGift(data)
+                            onGiftUpdate(gift, formData)
                             navigate(`/gifts/${gift.id}`)
                         })
                 } else {
