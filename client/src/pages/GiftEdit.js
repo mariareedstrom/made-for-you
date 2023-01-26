@@ -1,40 +1,59 @@
-import React, {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {Box, Button, FormControl, InputLabel, MenuItem, Paper, Select, TextField, Typography} from "@mui/material";
-import GiftMaterials from "./GiftMaterials";
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate, useParams} from "react-router-dom";
+import Box from "@mui/material/Box";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import Typography from "@mui/material/Typography";
+import {Button, FormControl, InputLabel, MenuItem, Paper, Select, TextField} from "@mui/material";
 
 const GIFT_TYPE = {
     CRAFT: 0,
     FOOD: 1,
     BEVERAGE: 2
 };
-
-function NewGiftForm({onAddGift}){
+function GiftEdit({gifts}) {
+    const [gift, setGift] =  useState(null)
+    const [errors, setErrors] = useState(null)
     const [formData, setFormData] = useState({
         name: "",
         picture_url: "",
         type_of_gift: GIFT_TYPE.FOOD,
         difficulty: 0,
         description: "",
-        items: [{id: 1, name: "", unit: "", quantity: 0}]
     })
-    const [errors, setErrors] = useState([])
 
+    const giftId = useParams().id
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (gifts.length > 0) {
+            const currentGift = gifts.find(({id}) => `${id}` === giftId)
+            if (currentGift) {
+                setGift(currentGift)
+            }
+        }
+    }, [gifts, giftId]);
+
+    useEffect(() => {
+        if (gift) {
+            setFormData({
+                name: gift.name,
+                picture_url: gift.picture_url,
+                type_of_gift: gift.type_of_gift,
+                difficulty: gift.difficulty,
+                description: gift.description,
+            })
+        }
+    }, [gift]);
 
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e){
         e.preventDefault()
 
-        const items = formData.items.filter(
-            (item) => item !== {}
-        );
-
-        fetch(`/api/gifts/`,{
-            method: "POST",
+        fetch(`/api/gifts/${gift.id}`,{
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -43,29 +62,23 @@ function NewGiftForm({onAddGift}){
             .then(res => {
                 if (res.ok) {
                     res.json()
-                        .then((cleaned) => {
-                            onAddGift(formData)
-                            navigate("/")
+                        .then((data) => {
+                            setGift(data)
+                            navigate(`/gifts/${gift.id}`)
                         })
-                } else
-                    res.json().then((errorsData) => {
-                        setErrors(errorsData)
-                    })
+                } else {
+                    res.json().then((errorsData) => setErrors(errorsData))
+                }
             })
     }
 
-    function onItemsUpdated(items) {
-        setFormData({ ...formData, items });
-    }
-
-
-    return(
+    return (
         <Box sx={{
             display: 'flex',
             justifyContent: 'center',
             padding:'40px'
         }}>
-            <Paper elevation={5}
+            <Paper elevation={10}
                    component="form"
                    onSubmit={handleSubmit}
                    sx={{
@@ -75,12 +88,27 @@ function NewGiftForm({onAddGift}){
                        gap: '24px',
                        maxWidth: '650px',
                        padding: '20px'
-
                    }}
             >
                 <Box>
-                    <Typography variant={"h6"}>Create a New Gift</Typography>
+                    <EditOutlinedIcon/>
+                    <Typography variant={"h6"}>Edit Your Gift</Typography>
                 </Box>
+
+                <TextField onChange={(e) => handleChange(e)}
+                           label="name"
+                           name="name"
+                           value={formData.name}
+                           placeholder="enter name"
+                           type="text"
+                           fullWidth required/>
+                <TextField onChange={(e) => handleChange(e)}
+                           label="picture"
+                           name="picture_url"
+                           value={formData.picture_url}
+                           placeholder="enter picture url"
+                           type="text"
+                           fullWidth required/>
                 <FormControl>
                     <InputLabel id="type_of_gift-label">Type</InputLabel>
                     <Select
@@ -96,21 +124,6 @@ function NewGiftForm({onAddGift}){
 
                     </Select>
                 </FormControl>
-
-                <TextField onChange={(e) => handleChange(e)}
-                           label="name"
-                           name="name"
-                           value={formData.name}
-                           placeholder="enter name"
-                           type="text"
-                           fullWidth required/>
-                <TextField onChange={(e) => handleChange(e)}
-                           label="image"
-                           name="picture_url"
-                           value={formData.picture_url}
-                           placeholder="enter picture url"
-                           type="text"
-                           fullWidth required/>
                 <TextField onChange={(e) => handleChange(e)}
                            label="difficulty"
                            name="difficulty"
@@ -125,11 +138,14 @@ function NewGiftForm({onAddGift}){
                            placeholder="enter gift description"
                            type="text"
                            fullWidth required/>
-                <Typography variant={"h7"}>Necessary Items:</Typography>
-                <GiftMaterials
-                    items={formData.items}
-                    onItemsUpdated={onItemsUpdated}
-                />
+
+                {!!errors && errors.length > 0 && (
+                    <ul style={{ color: "red" }}>
+                        {errors.map((error, i) => (
+                            <li key={i}>{error}</li>
+                        ))}
+                    </ul>
+                )}
 
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <Button variant="contained" size="medium" color="primary" aria-label="submit" type="submit">
@@ -141,7 +157,7 @@ function NewGiftForm({onAddGift}){
                 </Box>
             </Paper>
         </Box>
-    )
+    );
 }
 
-export default NewGiftForm;
+export default GiftEdit;

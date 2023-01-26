@@ -23,6 +23,7 @@ function App() {
     const [authenticated, setAuthenticated] = useState(false)
     const [gifts, setGifts] = useState([])
 
+
     const navigate = useNavigate()
 
     useEffect(()=> {
@@ -50,6 +51,10 @@ function App() {
         return <div></div>
     }
 
+    function handleAddGift(giftObj) {
+        setGifts([...gifts, giftObj])
+
+    }
     function handleLogout(){
         setCurrentMember(null)
         fetch('/api/logout', {method: "DELETE"})
@@ -77,7 +82,7 @@ function App() {
                             <Route path="/members/:id/edit" element={<MemberEdit />}/>
                             <Route path="/gifts/:id" element={<GiftShow gifts={gifts}/>}/>
                             <Route path="/gifts/:id/edit" element={<GiftEdit gifts={gifts} onDeleteGift={handleDeleteGift}/>}/>
-                            <Route path="/gifts/new" element={<NewGiftForm />}/>
+                            <Route path="/gifts/new" element={<NewGiftForm onAddGift={handleAddGift}/>}/>
                         </Routes>
                     </Container>
 

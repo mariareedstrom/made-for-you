@@ -4,11 +4,11 @@
 puts "🌱 Seeding your gifts..."
 
 #clean-up before seeding
-Member.destroy_all
+GiftRecipient.destroy_all
+Item.destroy_all
 Gift.destroy_all
 Recipient.destroy_all
-GiftRecipient.destroy_all
-
+Member.destroy_all
 
 #creating members
 martha = Member.create(name: "Martha Stewart", email: "martha@email.com", password: "martha", about: "Homemaker extraordinaire. Self-made millionaire. Favorite color: orange.", links: "instagram/martha.com")
@@ -16,13 +16,13 @@ bertha = Member.create(name: "Bertha Bee", email: "bertha@email.com", password: 
 joe = Member.create(name: "Joe Schmo", email: "joe@email.com", password: "joe", about: "Dabbling in homemade brews and liquors", links: "instagram/joes.com")
 alice = Member.create(name: "Alice", email: "alice@email.com", password: "alice", about: "Novice gift maker, longtime giver.", links: "instagram/alice.com")
 
-#creaing gifts
-g1 = Gift.create(member_id: martha.id, name: "Peanut Popcorn Balls", description: "Caramel-coated peanut-popcorn balls. Wrap them in plain parchment and striped waxed paper for the full bon-bon effect.", difficulty: 4, picture_url:"http://bit.ly/3kcNGiE", type_of_gift:1)
-g2 = Gift.create(member_id: bertha.id, name: "Sriracha Honey", description: "Sweet honey with a sting.", difficulty: 3, picture_url: "http://bit.ly/3krgl3S", type_of_gift:1)
-g3 = Gift.create(member_id: joe.id, name: "Limonchello", description: "Sweet, lemon flavored liquor. Takes about 3 months to complete, but worth the wait.", difficulty: 4, picture_url:"http://bit.ly/3WDvWup", type_of_gift:2)
-g4 = Gift.create(member_id: alice.id, name: "Beer Bread", description: "An easy and delicious loaf of bread.Make with your favorite brew. Bake and gift ready made, og mix dry ingredients in a mason jar and gift alongside their favorite beer.", difficulty: 3, picture_url:"http://bit.ly/3kqpedF", type_of_gift:1)
-g5 = Gift.create(member_id: alice.id, name: "Handmade Headbands", description: "Great gift for your fashion savvy ladies. Easy to make and cute to wear.", difficulty: 2, picture_url:"http://bit.ly/3ZYTvAL", type_of_gift:0)
-g6 = Gift.create(member_id: martha.id, name: "", description: "These easy spicy pickles are great for snacking and will amp up any sandwich or charcuterie board. No canning equipment required!", difficulty: 3, picture_url:"http://bit.ly/3XSmvs3", type_of_gift:0)
+#creating gifts
+g1 = Gift.create!(member_id: martha.id, name: "Peanut Popcorn Balls", description: "Caramel-coated peanut-popcorn balls. Wrap them in plain parchment and striped waxed paper for the full bon-bon effect.", difficulty: 4, picture_url:"http://bit.ly/3kcNGiE", type_of_gift:1)
+g2 = Gift.create!(member_id: bertha.id, name: "Sriracha Honey", description: "Sweet honey with a sting. It's mmm mmm good. No, really.", difficulty: 3, picture_url: "http://bit.ly/3krgl3S", type_of_gift:1)
+g3 = Gift.create!(member_id: joe.id, name: "Limonchello", description: "Sweet, lemon flavored liquor. Takes about 3 months to complete, but worth the wait.", difficulty: 4, picture_url:"http://bit.ly/3WDvWup", type_of_gift:2)
+g4 = Gift.create!(member_id: alice.id, name: "Beer Bread", description: "An easy and delicious loaf of bread.Make with your favorite brew. Bake and gift ready made, og mix dry ingredients in a mason jar and gift alongside their favorite beer.", difficulty: 3, picture_url:"http://bit.ly/3kqpedF", type_of_gift:1)
+g5 = Gift.create!(member_id: alice.id, name: "Handmade Headbands", description: "Great gift for your fashion savvy ladies. Easy to make and cute to wear.", difficulty: 2, picture_url:"http://bit.ly/3ZYTvAL", type_of_gift:0)
+g6 = Gift.create!(member_id: martha.id, name: "Swicy Pickles", description: "These easy spicy pickles are great for snacking and will amp up any sandwich or charcuterie board. No canning equipment required!", difficulty: 3, picture_url:"http://bit.ly/3XSmvs3", type_of_gift:0)
 
 
 #creating recipients
@@ -45,9 +45,19 @@ nick = Recipient.create(member_id: martha.id, name: "Nick N", notes: "allergic t
 gr1 = GiftRecipient.create(gift_id: g1.id, recipient_id: jane.id)
 gr2 = GiftRecipient.create(gift_id: g2.id, recipient_id: bob.id)
 gr3 = GiftRecipient.create(gift_id: g3.id, recipient_id: cindy.id)
+gr4 = GiftRecipient.create(gift_id: g4.id, recipient_id: dot.id)
+gr5 = GiftRecipient.create(gift_id: g5.id, recipient_id: emily.id)
+gr6 = GiftRecipient.create(gift_id: g6.id, recipient_id: greg.id)
+gr7 = GiftRecipient.create(gift_id: g1.id, recipient_id: allison.id)
+gr8 = GiftRecipient.create(gift_id: g2.id, recipient_id: jim.id)
+gr9 = GiftRecipient.create(gift_id: g3.id, recipient_id: kim.id)
+gr10 = GiftRecipient.create(gift_id: g4.id, recipient_id: jenny.id)
+gr11 = GiftRecipient.create(gift_id: g5.id, recipient_id: amy.id)
+gr12 = GiftRecipient.create(gift_id: g1.id, recipient_id: nick.id)
+
 
 #creating items
-i1 = Item.create(gift_id: g1.id, name: "peanutbutter", quantity: 2, unit: "tablespoons")
+i1 = Item.create(gift_id: g1.id, name: "peanut butter", quantity: 2, unit: "tablespoons")
 i2 = Item.create(gift_id: g1.id, name: "popcorn", quantity: 1, unit: "bag")
 i3 = Item.create(gift_id: g1.id, name: "caramel syrup", quantity: 3, unit: "teaspoons")
 i4 = Item.create(gift_id: g2.id, name: "minced garlic", quantity: 1, unit: "tablespoons")
