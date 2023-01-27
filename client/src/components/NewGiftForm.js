@@ -36,7 +36,9 @@ function NewGiftForm({onAddGift}){
         e.preventDefault()
 
         const items_attributes = formData.items.filter(
-            (item) => item !== {id: "", quantity: "0", unit: "", name: ""}
+            (item) => {
+                return item.id !== "" && item.name !== "" && item.quantity !== "" && item.unit !== ""
+            }
         );
 
         fetch(`/api/gifts/`,{

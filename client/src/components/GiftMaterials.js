@@ -3,6 +3,9 @@ import {Box, Button, FormControl, TextField} from "@mui/material";
 import List from "@mui/material/List";
 
 function GiftMaterials({items, onItemsUpdated}) {
+    // split items by group on _destroy => [_destroy:true, rest]
+
+    // map over rest
     const itemList = items.map((item, index) => {
         return (
             <FormControl component={"li"} key={`items[${index}]`} sx={{marginBottom: "16px"}}
@@ -43,12 +46,16 @@ function GiftMaterials({items, onItemsUpdated}) {
 
     function handleChangeItem(e) {
         const materialValues = serializeItems()
-        onItemsUpdated(materialValues)
+        onItemsUpdated(materialValues)// <- concat with _destroy set
     }
 
     function handleAddItem() {
-        const materialValues = serializeItems();
-        onItemsUpdated([...materialValues, {id: "", quantity: 0, unit: "", name: ""}]);
+        onItemsUpdated([...items, {id: "", quantity: "", unit: "", name: ""}]);
+    }
+
+    function handleDeleteItem(id) {
+        // add `_destroy: true` to object
+        // call items updated
     }
 
     return (

@@ -20,7 +20,7 @@ function GiftEdit({gifts, onGiftUpdate}) {
         type_of_gift: GIFT_TYPE.FOOD,
         difficulty: 0,
         description: "",
-        items: [{id: "", quantity: 0, unit: "", name: ""}],
+        items: [],
         instructions:""
     })
 
@@ -62,12 +62,18 @@ function GiftEdit({gifts, onGiftUpdate}) {
     function handleSubmit(e){
         e.preventDefault()
 
+        const items_attributes = formData.items.filter(
+            (item) => {
+                return item.id !== "" && item.name !== "" && item.quantity !== "" && item.unit !== ""
+            }
+        );
+
         fetch(`/api/gifts/${gift.id}`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({...formData, items_attributes})
         })
             .then(res => {
                 if (res.ok) {
