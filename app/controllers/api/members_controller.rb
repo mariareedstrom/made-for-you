@@ -19,13 +19,13 @@ class Api::MembersController < ApplicationController
   def update
     member = Member.find(params[:id])
     member.update(member_params)
-    render json: user, status: :ok
+    render json: member, status: :ok
   end
 
   private
 
   def member_params
-    params.permit(:name, :email, :password, :about, :links)
+    params.permit(:name, :email, :password, :about, :picture)
   end
 
 

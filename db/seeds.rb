@@ -54,6 +54,12 @@ gr9 = GiftRecipient.create(gift_id: g3.id, recipient_id: kim.id)
 gr10 = GiftRecipient.create(gift_id: g4.id, recipient_id: jenny.id)
 gr11 = GiftRecipient.create(gift_id: g5.id, recipient_id: amy.id)
 gr12 = GiftRecipient.create(gift_id: g1.id, recipient_id: nick.id)
+gr13 = GiftRecipient.create(gift_id: g1.id, recipient_id: bob.id)
+gr14 = GiftRecipient.create(gift_id: g2.id, recipient_id: jane.id)
+gr15 = GiftRecipient.create(gift_id: g3.id, recipient_id: dot.id)
+gr16 = GiftRecipient.create(gift_id: g4.id, recipient_id: emily.id)
+gr16 = GiftRecipient.create(gift_id: g6.id, recipient_id: kim.id)
+
 
 
 #creating items

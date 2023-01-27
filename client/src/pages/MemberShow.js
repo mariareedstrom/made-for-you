@@ -1,25 +1,22 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {CurrentMemberContext} from "../context/currentMember";
-import {Box, Button, Grid, Paper, Stack, styled, Typography} from "@mui/material";
-import GiftCard from "../components/GiftCard";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import GiftCard from "../components/GiftCard";
 import Recipient from "../components/Recipient";
 import NewRecipientForm from "../components/NewRecipientForm";
+import {Box, Button, Grid, Paper, Typography} from "@mui/material";
 
 
-function MemberShow({handleLogout, onGiftUpdate, gift}) {
+function MemberShow({handleLogout}) {
     const {currentMember} = useContext(CurrentMemberContext)
-    const {name, about, id, gifts} = currentMember
-    const [recipients, setRecipients] = useState(currentMember.recipients)
+    const [recipients, setRecipients] = useState([])
 
+    useEffect(() => {
+        setRecipients(currentMember.recipients)
+    }, [currentMember])
 
-    function handleAddRecipient(data) {
-console.log(data)
-    }
+    const {name, about, id, gifts, picture} = currentMember
 
     function handleDeleteRecipient(recipient_id) {
         return (_event) => {
@@ -37,9 +34,9 @@ console.log(data)
 
     return (
 
-        <Box>
-            < Box sx={{maxWidth: "550px", margin: "0 auto"}}>
+        <Box >
                 <Box sx={{
+                    maxWidth: "550px",
                     display: "flex",
                     justifyContent: "space-around",
                     margin: "18px 0px",
@@ -58,7 +55,7 @@ console.log(data)
                                  minWidth: "100%",
                                  objectFit: "cover"
                              }}
-                             src="/gift.png"/>
+                             src={picture}/>
                     </Box>
                     <Box>
                         <Typography variant="h4" gutterBottom sx={{marginTop: '16px'}}>
@@ -75,8 +72,9 @@ console.log(data)
                     </Box>
                 </Box>
 
+                <Box sx={{display:"flex"}}>
+                <Paper>
                 <Typography variant="h6" color="text.secondary">Gift Recipients</Typography>
-
                 <List style={{padding: 0}}>
                     {recipients.map((recipient) => (
                         <Recipient key={recipient.id}
@@ -87,7 +85,7 @@ console.log(data)
                     ))}
                 </List>
                 <NewRecipientForm recipients={recipients} setRecipients={setRecipients}/>
-
+                </Paper>
                 <Grid container spacing={4}>
                     {gifts.map((gift) => (
                         <Grid item display="flex" key={gift.id}>
@@ -95,8 +93,7 @@ console.log(data)
                         </Grid>
                     ))}
                 </Grid>
-
-            </Box>
+                </Box>
         </Box>
     )
 }

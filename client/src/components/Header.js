@@ -29,15 +29,13 @@ const navigate = useNavigate()
                                  style={{objectPosition: '0 -30px', height: '120px'}}/>
                         </div>
                     </Link>
-                    <Button size="small">Craft</Button>
-                    <Button size="small">Food</Button>
-                    <Button size="small">Beverage</Button>
 
-                    <Button variant="outlined" color="secondary" sx={{margin: "12px"}}
+
+                    <Button variant="outlined"  sx={{margin: "12px"}}
                             onClick={handleNewGift}>New Gift</Button>
 
 
-                    <Avatar variant="square" alt={`${currentMember.name}`} src="/gift.png" sx={{margin: "12px"}} onClick={handleViewMember}></Avatar>
+                    <Avatar variant="square" alt={`${currentMember.name}`} src={currentMember.picture} sx={{margin: "12px"}} onClick={handleViewMember}></Avatar>
                 </Toolbar>
             </Container>
         </AppBar>
