@@ -1,6 +1,7 @@
 import React from 'react';
-import {Box, Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
 import { Link } from 'react-router-dom';
+import {Box, Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
+
 
 function typeForValue(value) {
     if (value === 0) { return 'Craft'}
@@ -47,6 +48,6 @@ function GiftCard({gift}) {
             />
         </Card>
     );
-};
+}
 
 export default GiftCard;

@@ -1,12 +1,13 @@
-import React, {useContext, useEffect, useState, useRef} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
+import {CurrentMemberContext} from "../context/currentMember";
+import Item from "../components/Item";
 import {Box, Chip, FormControl, IconButton, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import List from '@mui/material/List';
-import Item from "../components/Item";
-import {CurrentMemberContext} from "../context/currentMember";
 import PersonAdd from "@mui/icons-material/PersonAdd";
+
 
 function typeForValue(value) {
     if (value === 0) {
@@ -106,9 +107,6 @@ function GiftShow({gifts, onDeleteGift}) {
                 navigate("/")
             })
     }
-
-
-
 
 
 

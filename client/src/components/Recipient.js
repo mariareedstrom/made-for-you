@@ -39,8 +39,6 @@ function Recipient({recipient, onDeleteRecipient}){
                     <IconButton onClick={onDeleteRecipient(recipient.id)} sx={{alignItems: "flex-end"}}>
                         <DeleteOutlineIcon color="error" />
                     </IconButton>
-
-
         </ListItem>
     )
 

@@ -2,7 +2,6 @@ import React, {useEffect, useState, useMemo} from "react";
 import './App.css';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import {CurrentMemberContext} from "./context/currentMember";
-import {Container} from "@mui/material";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 import Header from "./components/Header";
@@ -12,6 +11,7 @@ import NewGiftForm from "./components/NewGiftForm";
 import MemberShow from "./pages/MemberShow";
 import MemberEdit from "./pages/MemberEdit";
 import GiftEdit from "./pages/GiftEdit";
+import {Container} from "@mui/material";
 
 
 
@@ -77,7 +77,7 @@ function App() {
 
                 <CurrentMemberContext.Provider value={value}>
                     {currentMember ? <Header /> : null}
-                    <Container maxWidth="md">
+                    <Container maxWidth="md"  sx={{marginBottom: '24px'}} >
                         <Routes>
                             <Route path="/" element=
                                 {currentMember ? (

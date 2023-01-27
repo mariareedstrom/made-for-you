@@ -40,21 +40,26 @@ function NewRecipientForm({recipients, setRecipients}){
 
     return (
 
-        <Box onSubmit={handleSubmit} >
+        <Box onSubmit={handleSubmit}>
             <TextField onChange={(e) => handleChange(e)}
                        label="name"
                        name="name"
                        value={formData.name}
                        placeholder="add recipient"
                        fullWidth required
-                       sx={{marginBottom: '24px'}}/>
+                       size={'small'}
+                       variant={'standard'}
+                       sx={{marginBottom: '12px'}}/>
             <TextField onChange={(e) => handleChange(e)}
                        label="notes"
                        name="notes"
                        value={formData.notes}
                        placeholder="notes"
+                       variant={'standard'}
+                       size={'small'}
                        fullWidth required
-                       sx={{marginBottom: '24px'}}/>
+                       multiline
+                       sx={{marginBottom: '12px'}}/>
 
             {errors.length > 0 && (
                 <ul style={{color: "red"}}>
