@@ -5,7 +5,7 @@ import {CurrentMemberContext} from "../context/currentMember";
 
 
 function SignupForm() {
-    const {currentMember, setCurrentMember} = useContext(CurrentMemberContext)
+    const {setCurrentMember} = useContext(CurrentMemberContext)
     const [formData, setFormData] = useState({
         name: "",
         email: "",
