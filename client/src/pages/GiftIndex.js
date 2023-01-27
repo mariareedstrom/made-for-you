@@ -6,9 +6,9 @@ function GiftIndex({gifts}){
 
     return(
         <Box display="flex">
-            <Grid container spacing={4}>
+            <Grid container spacing={4} justifyContent="center">
                 {gifts.map((gift) => (
-                    <Grid item display="flex" key={gift.id}>
+                    <Grid item display="flex" key={gift.id} xs={8}>
                         <GiftCard gift={gift}/>
                     </Grid>
                 ))}
