@@ -4,24 +4,29 @@ import List from "@mui/material/List";
 
 function GiftMaterials({items, onItemsUpdated}) {
     // split items by group on _destroy => [_destroy:true, rest]
-
     // map over rest
+
     const itemList = items.map((item, index) => {
         return (
-            <FormControl component={"li"} key={`items[${index}]`} sx={{marginBottom: "16px"}}
+            <FormControl component={"li"} key={`items[${index}]`} sx={{display: "flex", flexWrap:"nowrap", flexDirection:"row", gap:"12px", marginBottom: "16px"}}
                          onChange={(e) => handleChangeItem(e)}>
                 <input type="hidden" name={`items[${index}].id`} value={item.id}/>
+                <Box sx={{display:"flex", flex:"0 1 30%"}}>
+                    <TextField
+                        sx={{'& fieldset': {borderTopRightRadius:"0", borderBottomRightRadius:"0"}}}
+                        key={`${index}.quantity`}
+                        label="Quantity"
+                        name={`items[${index}].quantity`}
+                        value={item.quantity}/>
+                    <TextField
+                        sx={{'& fieldset': {borderTopLeftRadius:"0", borderBottomLeftRadius:"0"}}}
+                        key={`${index}.unit`}
+                        label="Unit"
+                        name={`items[${index}].unit`}
+                        value={item.unit}/>
+                </Box>
                 <TextField
-                    key={`${index}.quantity`}
-                    label="Quantity"
-                    name={`items[${index}].quantity`}
-                    value={item.quantity}/>
-                <TextField
-                    key={`${index}.unit`}
-                    label="Unit"
-                    name={`items[${index}].unit`}
-                    value={item.unit}/>
-                <TextField
+                    sx={{display:"flex", flex:"1 1 80%"}}
                     key={`${index}.name`}
                     label="Name"
                     name={`items[${index}].name`}
@@ -53,10 +58,10 @@ function GiftMaterials({items, onItemsUpdated}) {
         onItemsUpdated([...items, {id: "", quantity: "", unit: "", name: ""}]);
     }
 
-    function handleDeleteItem(id) {
-        // add `_destroy: true` to object
-        // call items updated
-    }
+    // function handleDeleteItem(id) {
+    //     add `_destroy: true` to object
+    //     call items updated
+    // }
 
     return (
         <Box>
