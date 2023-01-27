@@ -2,6 +2,12 @@ import React from 'react';
 import {Box, Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
 import { Link } from 'react-router-dom';
 
+function typeForValue(value) {
+    if (value === 0) { return 'Craft'}
+    if (value === 1) { return 'Food'}
+    if (value === 2) { return 'Beverage'}
+}
+
 function GiftCard({gift}) {
     const {type_of_gift, name, description,  picture_url, difficulty, id} = gift
 
@@ -20,7 +26,7 @@ function GiftCard({gift}) {
                 </CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
                     <CardActions>
-                        <Button size="small">{type_of_gift}</Button>
+                        <Button size="small">{typeForValue(type_of_gift)}</Button>
                         <Button size="small">Difficulty: {difficulty}</Button>
                     </CardActions>
                     <CardActions>

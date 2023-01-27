@@ -8,7 +8,6 @@ function NewRecipientForm({recipients, setRecipients}){
     })
     const [errors, setErrors] = useState([])
 
-    console.log(recipients)
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
@@ -33,7 +32,7 @@ function NewRecipientForm({recipients, setRecipients}){
                         })
                 } else {
                     res.json().then((errorsData) => {
-                        setErrors((errorsData))
+                        setErrors(errorsData)
                     })
                 }
             })

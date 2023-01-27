@@ -1,5 +1,5 @@
 class Api::SessionsController < ApplicationController
-  skip_before_action :authenticate_member, only: :create
+  skip_before_action :authenticate_member, only: [:create, :destroy]
   def create
     user = Member.find_by_email(params[:email])
     if  user&.authenticate(params[:password])

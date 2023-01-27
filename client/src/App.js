@@ -53,7 +53,6 @@ function App() {
 
     function handleAddGift(giftObj) {
         setGifts([...gifts, giftObj])
-
     }
     function handleLogout(){
         setCurrentMember(null)

@@ -18,7 +18,7 @@ function GiftEdit({gifts, onGiftUpdate}) {
         name: "",
         picture_url: "",
         type_of_gift: GIFT_TYPE.FOOD,
-        difficulty: 0,
+        difficulty: 1,
         description: "",
         items: [],
         instructions:""
@@ -50,7 +50,6 @@ function GiftEdit({gifts, onGiftUpdate}) {
         }
     }, [gift]);
 
-    console.log(gift)
     function handleChange(e) {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
@@ -147,6 +146,7 @@ function GiftEdit({gifts, onGiftUpdate}) {
                            value={formData.difficulty}
                            placeholder="enter difficulty level"
                            type="number"
+                           inputProps={{min: 1, max: 5}}
                            fullWidth required/>
                 <TextField onChange={(e) => handleChange(e)}
                            label="description"
